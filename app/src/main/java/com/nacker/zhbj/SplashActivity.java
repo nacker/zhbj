@@ -10,6 +10,12 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.RelativeLayout;
 
+/**
+ * 闪屏页
+ *
+ * @author nacker
+ *
+ */
 public class SplashActivity extends Activity {
 
     RelativeLayout rlRoot;
