@@ -6,6 +6,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -21,11 +22,17 @@ public class GuideActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 去掉标题
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_guide);
 
         vpGuide = (ViewPager) findViewById(R.id.vp_guide);
         btnStart = (Button) findViewById(R.id.btn_start);
-//        vpGuide.setAdapter();
+
+        initViews();
+        vpGuide.setAdapter(new GuideAdapter());
     }
 
     /**
@@ -51,17 +58,20 @@ public class GuideActivity extends Activity {
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return false;
+            return view == object;
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            return super.instantiateItem(container, position);
+
+            container.addView(mImageViewList.get(position));
+
+            return mImageViewList.get(position);
         }
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            super.destroyItem(container, position, object);
+            container.removeView((View) object);
         }
     }
 }

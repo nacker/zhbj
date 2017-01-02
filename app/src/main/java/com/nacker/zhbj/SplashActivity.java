@@ -1,6 +1,7 @@
 package com.nacker.zhbj;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -53,6 +54,35 @@ public class SplashActivity extends Activity {
         set.addAnimation(scale);
         set.addAnimation(alpha);
 
+        // 设置动画监听
+        set.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            // 动画执行结束
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                jumpNextPage();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
         rlRoot.startAnimation(set);
+    }
+
+    /**
+     * 跳转下一个页面
+     */
+    private void jumpNextPage() {
+
+        // 跳转到新手引导页
+        startActivity(new Intent(SplashActivity.this, GuideActivity.class));
+        finish();
     }
 }
